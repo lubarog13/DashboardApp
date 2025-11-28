@@ -1,0 +1,11 @@
+version: '1.0'
+services:
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - VITE_BACKEND_URL=${VITE_BACKEND_URL}
+    container_name: dashboard-container
+    ports:
+      - 8080:80
