@@ -17,7 +17,6 @@ export class DashboardDocument {
     const file = new File([this.name + '\n' + this.description], this.name, {
       type: 'text/plain',
     })
-    console.log(file)
     return file
   }
 

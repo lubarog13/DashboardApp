@@ -1,25 +1,27 @@
 <template>
-  <div class="dashboard container">
-    <div class="dashboard__left">
-      <div class="dashboard__left-header">
-        <h2>Поиск документа</h2>
-        <BaseInput v-model="search" type="text" placeholder="Введите ID документа" @input="onInput" />
-        <h2>Результаты</h2>
-      </div>
-      <div class="dashboard__left-list" v-if="documentsStore.documents.length > 0">
-        <DocumentItem v-for="document in documentsStore.documents" :key="document.id" :document="document"
-          @click="clickDocument(document)" />
-      </div>
-      <div class="dashboard__left-list" v-else-if="errorMessage">
-        <p class="dashboard__left-list-empty error-message">{{ errorMessage }}</p>
-      </div>
-      <div class="dashboard__left-list" v-else>
-        <p class="dashboard__left-list-empty">Ничего не найдено</p>
-      </div>
+  <div class="container dashboard-container">
+    <div class="dashboard">
+      <div class="dashboard__left">
+        <div class="dashboard__left-header">
+          <h2>Поиск документа</h2>
+          <BaseInput v-model="search" type="text" placeholder="Введите ID документа" @input="onInput" />
+          <h2>Результаты</h2>
+        </div>
+        <div class="dashboard__left-list" v-if="documentsStore.documents.length > 0">
+          <DocumentItem v-for="document in documentsStore.documents" :key="document.id" :document="document"
+            @click="clickDocument(document)" />
+        </div>
+        <div class="dashboard__left-list" v-else-if="errorMessage">
+          <p class="dashboard__left-list-empty error-message">{{ errorMessage }}</p>
+        </div>
+        <div class="dashboard__left-list" v-else>
+          <p class="dashboard__left-list-empty">Ничего не найдено</p>
+        </div>
 
-    </div>
-    <div class="dashboard__right">
-      <DocumentPreview />
+      </div>
+      <div class="dashboard__right">
+        <DocumentPreview />
+      </div>
     </div>
   </div>
 </template>
@@ -92,13 +94,15 @@ const onInput = debounce((event: Event) => {
   width: 100%;
   height: 100%;
   display: flex;
-  margin-top: 35px;
   align-items: stretch;
   border-radius: var(--border-radius-big);
   overflow: hidden;
   box-shadow: 0px 0px 10px 0px var(--shadow-color);
-  height: calc(100% - 75px);
+}
 
+.dashboard-container {
+  height: calc(100% - 75px);
+  margin-top: 35px;
 }
 
 .dashboard__left {
@@ -147,13 +151,14 @@ const onInput = debounce((event: Event) => {
 }
 
 @media (max-width: 768px) {
+  .dashboard-container {
+    margin-bottom: 35px;
+    height: auto;
+  }
+
   .dashboard {
     flex-direction: column;
-    height: auto;
-    margin-bottom: 35px;
-    margin-left: 20px;
-    margin-right: 20px;
-    width: calc(100% - 40px);
+    padding: 20px;
   }
 
   .dashboard__left {
